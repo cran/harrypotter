@@ -1,42 +1,3 @@
-#' Original 'Harry Potter' colour map
-#'
-#' A dataset containing some colour palettes inspired on the Harry Potter Universe
-#'
-#'
-#'@format A data frame containing all the colours used in the palette:
-#'\itemize{
-#'   \item V1: Red value
-#'   \item V2: Green value
-#'   \item V3: Blue value
-#'   \item option: It is intended to be a general option for choosing the specific colour palette.
-#'}
-"hp.map"
-
-
-
-#' Available Palettes.
-#'
-#' This function outpus a vector containing the names of all the available palettes in the 'harrypotter' package.
-#'
-#' @return \code{hp_palettes} returns a character vector with the names of the palettes available to use.
-#'
-#' @author Alejandro Jiménez Rico \email{aljrico@@gmail.com}
-#'
-#'
-#' @examples
-#' hp_palettes()
-#'
-#' @rdname hp_palettes
-#' @export
-
-hp_palettes <- function(){
-	return(unique(hp.map$option))
-}
-
-#'
-#'
-#'
-#'
 #' Harry Potter Colour Map.
 #'
 #' This function creates a vector of \code{n} equally spaced colors along the
@@ -57,8 +18,7 @@ hp_palettes <- function(){
 #' @param option A character string indicating the colourmap from a option to use.
 #' Four houses are available: "Gryffindor", "Slytherin", "Ravenclaw" and "Hufflepuff".
 #'
-#' @param house A character string indicating the colourmap from a option to use. This parameter is deprectaed, 'option' should be used instead.
-#' Four houses are available: "Gryffindor", "Slytherin", "Ravenclaw" and "Hufflepuff".
+#' @param house Depcreated. Use 'option' instead.
 #'
 #' @return \code{hp} returns a character vector, \code{cv}, of color hex
 #' codes. This can be used either to create a user-defined color palette for
@@ -69,15 +29,6 @@ hp_palettes <- function(){
 #'
 #' @details
 #'
-#' \if{html}{Here are the color scales:
-#'
-#'   \out{<div style="text-align: center">}\figure{hogwarts-scales.png}{houses: style="width:750px;max-width:90\%;"}\out{</div>}
-#'
-#'   }
-#' \if{latex}{Here are the color scales:
-#'
-#'   \out{\begin{center}}\figure{hogwarts-scales.png}\out{\end{center}}
-#'   }
 #'
 #'
 #' Semi-transparent colors (\eqn{0 < alpha < 1}) are supported only on some
@@ -154,8 +105,8 @@ hp_pal <- function(alpha = 1, begin = 0, end = 1, direction = 1, option = 'Alway
 #' @importFrom ggplot2 scale_fill_gradientn scale_color_gradientn discrete_scale
 #'
 #' @export
-scale_color_hp <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
-													 discrete = FALSE, option = 'Always', house = NULL) {
+scale_color_hp <- function(option = 'Always', ..., alpha = 1, begin = 0, end = 1, direction = 1,
+													 discrete = FALSE, house = NULL) {
 
 	if(!is.null(house)) option <- house
 	option <- tolower(option)
@@ -178,8 +129,8 @@ scale_colour_hp <- scale_color_hp
 #' @rdname scale_hp
 #' @aliases scale_color_hp
 #' @export
-scale_colour_hp_d <- function(..., alpha = 1, begin = 0, end = 1,
-															direction = 1, option = 'Always') {
+scale_colour_hp_d <- function(option = 'Always', ..., alpha = 1, begin = 0, end = 1,
+															direction = 1) {
 	discrete_scale("colour", "hp", hp_pal(alpha, begin, end, direction, option), ...)
 }
 
@@ -193,8 +144,8 @@ scale_color_hp_d <- scale_colour_hp_d
 #' @aliases scale_fill_hp
 #' @importFrom ggplot2 discrete_scale
 #' @export
-scale_fill_hp_d <- function(..., alpha = 1, begin = 0, end = 1,
-														direction = 1, option = 'Always') {
+scale_fill_hp_d <- function(option = 'Always', ..., alpha = 1, begin = 0, end = 1,
+														direction = 1) {
 	discrete_scale("fill", "hp", hp_pal(alpha, begin, end, direction, option), ...)
 }
 
@@ -262,8 +213,8 @@ harrypotter <- hp
 #'
 #'
 #' @export
-scale_fill_hp <- function(..., alpha = 1, begin = 0, end = 1, direction = 1,
-													discrete = FALSE, option = 'Always', house = NULL) {
+scale_fill_hp <- function(option = 'Always', ..., alpha = 1, begin = 0, end = 1, direction = 1,
+													discrete = FALSE, house = NULL) {
 
 	if(!is.null(house)) option <- house
 	option <- tolower(option)
